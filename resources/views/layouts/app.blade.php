@@ -13,21 +13,33 @@
 
       <ul class="flex items-center">
         <li>
-          <a href="" class="p-3">Home</a>
+          <a href="{{ route('home') }}" class="p-3">Home</a>
         </li>
         <li>
-          <a href="" class="p-3">Dashboard</a>
+          <a href="{{ route('dashboard') }}" class="p-3">Dashboard</a>
         </li>
         <li>
-          <a href="" class="p-3">Blogs</a>
+          <a href="{{ route('blogs') }}" class="p-3">Blogs</a>
         </li>
       </ul>
 
 
       <ul class="flex items-center">
-        <li><a href="" class="p-3">Log In</a></li>
-        <li><a href="" class="p-3">Register</a></li>
-        <li><a href="" class="p-3">Log Out</a></li>
+
+        @auth
+          <li><a href="" class="p-3">User Name</a></li>     
+          <li>
+            <form action="{{ route('logout') }}" method="post" class="p-3 inline">
+              @csrf
+              <button type="submit">Log Out</button>
+            </form>
+          </li>
+        @endauth
+
+        @guest
+          <li><a href="{{ route('login') }}" class="p-3">Log In</a></li>
+          <li><a href="{{ route('register') }}" class="p-3">Register</a></li>
+        @endguest
       </ul>
 
 
