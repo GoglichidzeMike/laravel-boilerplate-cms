@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 
 class BlogsController extends Controller
 {
-   public function index()
+    //public blogs index
+    public function index()
    {
-       return view('blogs.index');
+    $blogs = Blog::paginate(10); 
+    
+    return view('blogs.index', [ 
+        'blogs' => $blogs
+    ]);
    }
-
-
-
+   
    public function store(Request $request)
    {
 
@@ -31,4 +34,37 @@ class BlogsController extends Controller
     
         return back();
    }
+
+
+   //blog dashboard index
+
+   
+    public function blog_dashboard_index()
+    {
+       $blogs = Blog::paginate(20); 
+        
+       return view('dashboard.blogs.index', [ 
+        'blogs' => $blogs
+       ]);
+    }
+
+    //blog dashboard create page
+
+
+    public function blog_create()
+    {
+       return view('dashboard.blogs.create');
+    }
+
+   //blog dashboard edit
+   
+   //blog dashboard update
+   
+   //blog dashboard delete
+
+   //blog dashboard 
+
+
+
+
 }

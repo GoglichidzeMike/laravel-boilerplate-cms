@@ -2,7 +2,10 @@
 
 @section('content')
     
-<div class="flex justify-center">
+
+<div class="flex flex-col items-center" >
+
+  @include('dashboard.includes.nav')
   <div class="w-8/12 bg-white p-6 rounded-lg">
     Dashboard
   </div>
