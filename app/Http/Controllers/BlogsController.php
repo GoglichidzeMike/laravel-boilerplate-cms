@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
+
 
 class BlogsController extends Controller
 {
     //public blogs index
     public function index()
    {
-
     $blogs = Blog::paginate(10); 
     return view('blogs.index', [ 
         'blogs' => $blogs
@@ -18,7 +20,7 @@ class BlogsController extends Controller
    }
    
 
-
+   /// for dashboard
    
    public function store(Request $request)
    {
@@ -94,6 +96,7 @@ class BlogsController extends Controller
 
         if($request->hasFile('image'))
         {
+            File::delete('uploads/image/'.$blog->image);
             $image = $request->file('image');
             $destinationPath = 'uploads/image/';
             $filename = date('YmdHis') . "." . $image->getClientOriginalExtension();
@@ -112,6 +115,9 @@ class BlogsController extends Controller
     {
         $blog = Blog::find($id);
         $blog->delete();
+        
+        File::delete('uploads/image/'.$blog->image);
+
         return redirect()->route('blog.dashboard')->with('status', 'Blog deleted successfully');
     }
 

@@ -13,7 +13,7 @@
       {{$blog->name}}      
     </h2>
 
-    <div class="my-3">
+    <div class="my-10">
       <img class="rounded-md max-w-sm" src="{{asset('/uploads/image/'.$blog->image)}}" alt="{{ $blog->name }}">
     </div>
 
