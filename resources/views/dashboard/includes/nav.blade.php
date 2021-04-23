@@ -12,3 +12,14 @@
     </div>
   </ul>
 </div>
+
+
+
+
+@if (session('status'))
+  <div class="mb-6 bg-white rounded-lg w-8/12 p-3">
+   <div class="mx-auto text-center text-green-700 font-medium">
+      {{ session('status') }}
+    </div>
+  </div>
+@endif  

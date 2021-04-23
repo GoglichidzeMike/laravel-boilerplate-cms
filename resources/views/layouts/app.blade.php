@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <title>Irma</title>
 </head>
-<body class="bg-gray-200">
+<body class="bg-gray-200 min-h-screen flex justify-between flex-col">
 
     <div class="p-6 bg-white flex justify-between mb-6">
 
@@ -43,7 +43,21 @@
 
     </div>
 
+      @yield('content')
 
-  @yield('content')
+
+    <footer class="mt-auto">
+       <div class="p-6 bg-white flex justify-between">
+
+      <ul class="flex items-center">
+        <li>
+          <a href="{{ route('home') }}" class="p-3">Home</a>
+        </li>
+        <li>
+          <a href="{{ route('blogs') }}" class="p-3">Blogs</a>
+        </li>
+      </ul>
+    </footer>
+
 </body>
 </html>
