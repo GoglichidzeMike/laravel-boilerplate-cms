@@ -12,17 +12,15 @@ Route::get('/', function(){
 })->name('home');
 
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
-Route::get('/dashboard/blogs', [DashboardController::class,'blog_dashboard_index'])->name('blog.dashboard');
-Route::get('/dashboard/blogs/create', [DashboardController::class,'blog_create'])->name('blog.create');
-Route::get('/dashboard/blogs/{slug}', [DashboardController::class,'blog_show'])->name('blog.show');
-Route::get('/dashboard/blogs/edit/{id}', [DashboardController::class,'blog_edit'])->name('blog.edit');
-Route::post('/dashboard/blogs/update/{id}', [DashboardController::class,'blog_update'])->name('blog.update');
-Route::post('/dashboard/blogs/{id}', [DashboardController::class,'blog_delete'])->name('blog.destroy');
-Route::post('/blogs', [DashboardController::class,'store']);
+Route::get('/dashboard/blogs', [BlogsController::class,'blog_dashboard_index'])->name('blog.dashboard');
+Route::get('/dashboard/blogs/create', [BlogsController::class,'blog_create'])->name('blog.create');
+Route::get('/dashboard/blogs/{slug}', [BlogsController::class,'blog_show'])->name('blog.show');
+Route::get('/dashboard/blogs/edit/{id}', [BlogsController::class,'blog_edit'])->name('blog.edit');
+Route::post('/dashboard/blogs/update/{id}', [BlogsController::class,'blog_update'])->name('blog.update');
+Route::post('/dashboard/blogs/{id}', [BlogsController::class,'blog_delete'])->name('blog.destroy');
 
-
-
-Route::get('/blogs', [BlogsController::class,'index'])->name('blogs');
+Route::get('/blogs', [BlogsController::class,'index'])->name('blogs');    // TODO: need to move this to public-blogs
+Route::post('/blogs', [BlogsController::class,'store']);
 
 
 
