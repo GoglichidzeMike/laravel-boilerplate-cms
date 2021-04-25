@@ -18,7 +18,4 @@ class DashboardController extends Controller
         return view('dashboard');
     }
 
-
-
-
 }

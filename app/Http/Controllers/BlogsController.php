@@ -21,13 +21,12 @@ class BlogsController extends Controller
 
 
 
-
     public function store(Request $request)
     {
     $this->validate($request, [
         'body'=> 'required',
         'name'=> 'required',
-        'slug'=> 'required',
+        'slug'=> 'required|unique:blogs',
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
 
@@ -40,7 +39,7 @@ class BlogsController extends Controller
     $request->user()->blogs()->create([
         'body'=> $request->body,
         'name'=> $request->name,
-        'slug'=> $request->slug,
+        'slug'=> strtolower($request->slug),
         'image'=> $filename
     ]);
 
@@ -51,24 +50,24 @@ class BlogsController extends Controller
     //blog dashboard index
 
 
-    public function blog_dashboard_index()
+    public function index_dashboard()
     {
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(20); 
         
         return view('dashboard.blogs.index', [ 
-        'blogs' => $blogs
+            'blogs' => $blogs
         ]);
     }
 
     //blog dashboard create page
-    public function blog_create()
+    public function create()
     {
         return view('dashboard.blogs.create');
     }
 
     //blog dashboard show
 
-    public function blog_show($slug)
+    public function show($slug)
     {
 
         $blog = Blog::where('slug', '=', $slug)->firstOrFail();
@@ -80,7 +79,7 @@ class BlogsController extends Controller
 
 
     //blog dashboard edit
-    public function blog_edit($id)
+    public function edit($id)
     {
         $blog = Blog::find($id);
         return view('dashboard.blogs.edit', ['blog' => $blog]);
@@ -88,11 +87,12 @@ class BlogsController extends Controller
 
     //blog dashboard update
 
-    public function blog_update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $blog = Blog::find($id);
         $blog->name = $request->name;
         $blog->body = $request->body;
+        $blog->slug = strtolower($request->slug);
 
         if($request->hasFile('image'))
         {
@@ -111,7 +111,7 @@ class BlogsController extends Controller
 
     //blog dashboard delete
 
-    public function blog_delete($id)
+    public function destroy($id)
     {
         $blog = Blog::find($id);
         $blog->delete();

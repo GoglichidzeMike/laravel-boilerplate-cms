@@ -10,6 +10,7 @@
       <li ><a href="/dashboard/events">Events</a></li>
       <li><a href="/dashboard/events/create">Create Event</a></li>
     </div>
+    <li><a href="/dashboard/leads">Leads</a></li>
   </ul>
 </div>
 
