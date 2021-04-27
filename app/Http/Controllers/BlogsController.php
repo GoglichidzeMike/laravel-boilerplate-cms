@@ -132,7 +132,8 @@ class BlogsController extends Controller
         $filename = date('YmdHis') ."." . $file->getClientOriginalExtension();
         $path = '/uploads/image/'.$filename;
         $file->move('uploads/image' ,$filename);
-        $fileNameToStore= $path;
+        $fileNameToStore = $path;
+
 
         return json_encode(['location' => $fileNameToStore]); 
     }
