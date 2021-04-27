@@ -6,9 +6,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
-use GuzzleHttp\Psr7\Request;
+// use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\File;
 
 
 //some public routes
@@ -22,25 +22,18 @@ Route::get('/contact', function(){
 })->name('contact');
 
 
-// Route::post('/upload', function(){
-//     // $imgpath = request()->file('image')->store('uploads', 'public');    
 
 
-//     // return response()->json(['location' => $imgpath]);
 
+// Route::post('/upload', function(Request $request){
+//     $file=$request->file('file');
+//     $filename = date('YmdHis') . $file->getClientOriginalExtension();
+//     $path= url('/uploads/image').'/'.$filename;
+//     $file->move(public_path('/uploads/image'),$filename);
+//     $fileNameToStore= $path;
+
+//     return json_encode(['location' => $fileNameToStore]); 
 // });
-Route::post('/upload', function(Request $request){
-    // $imgpath = request()->file('image')->store('uploads', 'public');    
-    // $imgpath = $request;    
-
-    $image = request()->file('image');
-    $destinationPath = 'uploads/image/';
-    $filename = date('YmdHis') . "." . $image->getClientOriginalExtension();
-    $image->move($destinationPath, $filename);
-
-
-    return json_encode(['location' => $filename ]);
-});
 
 
 //dashboard route
@@ -54,6 +47,7 @@ Route::get('/dashboard/blogs/{slug}', [BlogsController::class,'show'])->name('bl
 Route::get('/dashboard/blogs/edit/{id}', [BlogsController::class,'edit'])->name('blog.edit')->middleware('auth');
 Route::post('/dashboard/blogs/update/{id}', [BlogsController::class,'update'])->name('blog.update')->middleware('auth');
 Route::post('/dashboard/blogs/{id}', [BlogsController::class,'destroy'])->name('blog.destroy')->middleware('auth');
+Route::post('/dashboard/blog/upload', [BlogsController::class,'image_upload'])->middleware('auth');
 
 Route::get('/blogs', [BlogsController::class,'index'])->name('blogs');    // TODO: need to move this to public-blogs
 Route::post('/blogs', [BlogsController::class,'store']);

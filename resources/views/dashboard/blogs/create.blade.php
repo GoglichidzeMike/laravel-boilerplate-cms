@@ -54,14 +54,21 @@
           plugins: [
                 "advlist autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste imagetools"
+                "insertdatetime media table contextmenu paste imagetools textcolor"
             ],
-          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+          toolbar: "insertfile undo redo | styleselect | fontsizeselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+          fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt",
+          images_upload_url: '/dashboard/blog/upload',
+          images_upload_credentials: true,
+          image_title: true,
+          automatic_uploads: true,
+          file_picker_types: 'image',
+
           images_upload_handler: function (blobInfo, success, failure) {
             var xhr, formData;
             xhr = new XMLHttpRequest();
             xhr.withCredentials = false;
-            xhr.open('POST', '/upload');
+            xhr.open('POST', '/dashboard/blog/upload');
             var token = '{{ csrf_token() }}';
             xhr.setRequestHeader("X-CSRF-Token", token);
             xhr.onload = function() {

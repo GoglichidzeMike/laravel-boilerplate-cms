@@ -122,4 +122,21 @@ class BlogsController extends Controller
     }
 
 
+
+
+    //handles image upload in TinyMCE 
+
+    public function image_upload(Request $request)
+    {
+        $file=$request->file('file');
+        $filename = date('YmdHis') ."." . $file->getClientOriginalExtension();
+        $path = '/uploads/image'.'/'.$filename;
+        $file->move('uploads/image' ,$filename);
+        $fileNameToStore= $path;
+
+        return json_encode(['location' => $fileNameToStore]); 
+    }
+
+
+    //TODO: FIX EDITING
 }
