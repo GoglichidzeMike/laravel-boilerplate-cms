@@ -43,10 +43,48 @@
 
       <script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
       <script>
-          tinymce.init({
-              selector:'textarea.content',
-              height: 500
-          });
+        tinymce.init({
+          selector:'textarea.content',
+          height: 500,
+          plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste imagetools textcolor"
+            ],
+          toolbar: "insertfile undo redo | styleselect | fontsizeselect | forecolor backcolor | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+          fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt",
+          images_upload_url: '/dashboard/blog/upload',
+          images_upload_credentials: true,
+          image_title: true,
+          automatic_uploads: true,
+          file_picker_types: 'image',
+
+          images_upload_handler: function (blobInfo, success, failure) {
+            var xhr, formData;
+            xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '/dashboard/blog/upload');
+            var token = '{{ csrf_token() }}';
+            xhr.setRequestHeader("X-CSRF-Token", token);
+            xhr.onload = function() {
+                var json;
+                if (xhr.status != 200) {
+                    failure('HTTP Error: ' + xhr.status);
+                    return;
+                }
+                json = JSON.parse(xhr.responseText);
+
+                if (!json || typeof json.location != 'string') {
+                    failure('Invalid JSON: ' + xhr.responseText);
+                    return;
+                }
+                success(json.location);
+            };
+            formData = new FormData();
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+            xhr.send(formData);
+          }
+        });
       </script>
     </form>
 
