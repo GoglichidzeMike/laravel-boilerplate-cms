@@ -50,6 +50,7 @@ Route::post('/dashboard/blogs/{id}', [BlogsController::class,'destroy'])->name('
 Route::post('/dashboard/blog/upload', [BlogsController::class,'image_upload'])->middleware('auth');
 
 Route::get('/blogs', [BlogsController::class,'index'])->name('blogs');    // TODO: need to move this to public-blogs
+Route::get('/blogs/{slug}', [BlogsController::class,'public_show'])->name('public_blogs.show');
 Route::post('/blogs', [BlogsController::class,'store']);
 
 

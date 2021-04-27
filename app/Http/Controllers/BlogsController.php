@@ -12,15 +12,27 @@ class BlogsController extends Controller
     //public blogs index
     public function index()
    {
-    $blogs = Blog::paginate(10); 
+    $blogs = Blog::orderBy('created_at', 'desc')->paginate(10); 
     return view('blogs.index', [ 
         'blogs' => $blogs
     ]);
    }
+   
+
+
+    public function public_show($slug)
+    {
+
+        $blog = Blog::where('slug', '=', $slug)->firstOrFail();
+
+        return view('blogs.show',[
+            'blog' => $blog
+        ]);
+    }
 
 
 
-
+    //dashboard blogs start here
     public function store(Request $request)
     {
     $this->validate($request, [
@@ -139,5 +151,4 @@ class BlogsController extends Controller
     }
 
 
-    //TODO: FIX EDITING
 }
