@@ -6,7 +6,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
 
 
 //some public routes
@@ -18,6 +20,28 @@ Route::get('/', function(){
 Route::get('/contact', function(){
     return view('contact.index');
 })->name('contact');
+
+
+// Route::post('/upload', function(){
+//     // $imgpath = request()->file('image')->store('uploads', 'public');    
+
+
+//     // return response()->json(['location' => $imgpath]);
+
+// });
+Route::post('/upload', function(Request $request){
+    // $imgpath = request()->file('image')->store('uploads', 'public');    
+    // $imgpath = $request;    
+
+    $image = request()->file('image');
+    $destinationPath = 'uploads/image/';
+    $filename = date('YmdHis') . "." . $image->getClientOriginalExtension();
+    $image->move($destinationPath, $filename);
+
+
+    return json_encode(['location' => $filename ]);
+});
+
 
 //dashboard route
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
@@ -47,6 +71,3 @@ Route::post('/login', [LoginController::class,'store']);
 Route::get('/register', [RegisterController::class,'index'])->name('register');
 Route::post('/register', [RegisterController::class,'store']);
 Route::post('/logout', [LogoutController::class,'store'])->name('logout');
-
-
-
