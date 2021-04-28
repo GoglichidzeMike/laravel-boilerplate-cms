@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\LeadController;
 // use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Request;
@@ -50,8 +51,25 @@ Route::post('/dashboard/blogs/{id}', [BlogsController::class,'destroy'])->name('
 Route::post('/dashboard/blog/upload', [BlogsController::class,'image_upload'])->middleware('auth');
 
 Route::get('/blogs', [BlogsController::class,'index'])->name('blogs');    // TODO: need to move this to public-blogs
-Route::get('/blogs/{slug}', [BlogsController::class,'public_show'])->name('public_blogs.show');
-Route::post('/blogs', [BlogsController::class,'store']);
+Route::get('/blogs/{slug}', [BlogsController::class,'public_show'])->name('public_blogs.show'); // TODO: need to move this to public-blogs
+Route::post('/blogs', [BlogsController::class,'store'])->middleware('auth');
+
+
+//event controllers
+
+Route::get('/dashboard/event', [EventController::class,'index_dashboard'])->name('event.dashboard')->middleware('auth');
+Route::get('/dashboard/event/create', [EventController::class,'create'])->name('event.create')->middleware('auth');
+Route::get('/dashboard/event/{slug}', [EventController::class,'show'])->name('event.show')->middleware('auth');
+Route::get('/dashboard/event/edit/{id}', [EventController::class,'edit'])->name('event.edit')->middleware('auth');
+Route::post('/dashboard/event/update/{id}', [EventController::class,'update'])->name('event.update')->middleware('auth');
+Route::post('/dashboard/event/{id}', [EventController::class,'destroy'])->name('event.destroy')->middleware('auth');
+Route::post('/dashboard/event/upload', [EventController::class,'image_upload'])->middleware('auth');
+
+Route::get('/event', [EventController::class,'index'])->name('events');    // TODO: need to move this to public-blogs
+Route::get('/event/{slug}', [EventController::class,'public_show'])->name('public_event.show'); // TODO: need to move this to public-blogs
+Route::post('/event', [EventController::class,'store'])->middleware('auth');
+
+
 
 
 // contact controllers

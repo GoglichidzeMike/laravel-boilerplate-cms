@@ -35,25 +35,25 @@ class BlogsController extends Controller
     //dashboard blogs start here
     public function store(Request $request)
     {
-    $this->validate($request, [
-        'body'=> 'required',
-        'name'=> 'required',
-        'slug'=> 'required|unique:blogs',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+        $this->validate($request, [
+            'body'=> 'required',
+            'name'=> 'required',
+            'slug'=> 'required|unique:blogs',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    //get image, set destination path, change image name to current time in secs and save it.
-    $image = $request->file('image');
-    $destinationPath = 'uploads/image/';
-    $filename = date('YmdHis') . "." . $image->getClientOriginalExtension();
-    $image->move($destinationPath, $filename);
+        //get image, set destination path, change image name to current time in secs and save it.
+        $image = $request->file('image');
+        $destinationPath = 'uploads/image/';
+        $filename = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        $image->move($destinationPath, $filename);
 
-    $request->user()->blogs()->create([
-        'body'=> $request->body,
-        'name'=> $request->name,
-        'slug'=> strtolower($request->slug),
-        'image'=> $filename
-    ]);
+        $request->user()->blogs()->create([
+            'body'=> $request->body,
+            'name'=> $request->name,
+            'slug'=> strtolower($request->slug),
+            'image'=> $filename
+        ]);
 
         return redirect()->route('blog.dashboard')->with('status', 'Blog created successfully');
     }

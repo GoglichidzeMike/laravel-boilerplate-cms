@@ -7,8 +7,8 @@
       <li><a href="/dashboard/blogs/create">Create Blog</a></li>
     </div>
     <div class="flex w-2/12 justify-between">
-      <li ><a href="/dashboard/events">Events</a></li>
-      <li><a href="/dashboard/events/create">Create Event</a></li>
+      <li ><a href="/dashboard/event">Events</a></li>
+      <li><a href="/dashboard/event/create">Create Event</a></li>
     </div>
     <li><a href="/dashboard/leads">Leads</a></li>
   </ul>

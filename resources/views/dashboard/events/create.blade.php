@@ -7,24 +7,36 @@
 
   
   <div class="w-8/12 bg-white p-6 rounded-lg mb-4">
-    <form action="{{ route('blog.update', $blog->id) }}" method="post" class="mb-4" enctype="multipart/form-data">
+    <form action="{{ route('events') }}" method="post" class="mb-4" enctype="multipart/form-data">
       @csrf
       <div class="mb-4">
 
+         <h2 class="text-2xl mb-2">Create an event</h2>
          <label for="name" class="sr-only">Name</label>
-         <input type="text" name="name" id="name" placeholder="Blog Name"
+         <input type="text" name="name" id="name" placeholder="Event Name"
           class="bg-gray-100 border-2 w-full p-4 rounded-lg mb-3 @error('name') border-red-500 @enderror " 
-          value="{{ $blog->name }}">
+          value="{{ old('name') }}">
 
          <label for="slug" class="sr-only">Slug</label>
-         <input type="text" name="slug" id="slug" placeholder="Blog Slug"
+         <input type="text" name="slug" id="slug" placeholder="Event Slug"
           class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 @error('slug') border-red-500 @enderror " 
-          value="{{ $blog->slug }}">
+          value="{{ old('slug') }}">
+
+        
+         <label for="date" class="sr-only">Date</label>
+         <input type="text" name="date" id="date" placeholder="Event Date (optional)"
+          class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 @error('date') border-red-500 @enderror " 
+          value="{{ old('date') }}">
 
 
+        <label for="duration" class="sr-only">Date</label>
+         <input type="text" name="duration" id="duration" placeholder="Event Duration (optional)"
+          class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 @error('duration') border-red-500 @enderror " 
+          value="{{ old('duration') }}">
 
         <label for="image" class="sr-only">Image</label>
-        <input type="file" name="image" id="image" class="bg-gray-100 border-2 p-2 text-xs rounded-lg mb-4 @error('image') border-red-500 @enderror" >
+        <input type="file" name="image" id="image" class="bg-gray-100 border-2 p-2 text-xs rounded-lg mb-4 @error('image') border-red-500 @enderror " 
+          value="{{ old('slug') }}" placeholder="image">
           @error('image')
           <div class="text-red-500 mt-2 text-sm">
             {{ $message }}
@@ -33,12 +45,11 @@
 
 
         <label for="body" class="sr-only">Body</label>
-        <textarea name="body" id="body" cols="30" rows="20" class="bg-gray-100  border-2 w-full p-4 rounded-lg content" @error('body') border-red-500  @enderror placeholder="Post Body">{{ $blog->body }}</textarea>
-
+        <textarea name="body" id="body" cols="30" rows="20" class="bg-gray-100  border-2 w-full p-4 rounded-lg content" @error('body') border-red-500  @enderror placeholder="Post Body"></textarea>
       </div>
 
       <div class="div">
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded font-medium hover:bg-blue-700">Update</button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded font-medium hover:bg-blue-700">Create</button>
       </div>
 
       <script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>

@@ -7,21 +7,33 @@
 
   
   <div class="w-8/12 bg-white p-6 rounded-lg mb-4">
-    <form action="{{ route('blog.update', $blog->id) }}" method="post" class="mb-4" enctype="multipart/form-data">
+    <form action="{{ route('event.update', $event->id) }}" method="post" class="mb-4" enctype="multipart/form-data">
       @csrf
       <div class="mb-4">
 
+
+         <h2 class="text-2xl mb-2">Edit an event</h2>
          <label for="name" class="sr-only">Name</label>
-         <input type="text" name="name" id="name" placeholder="Blog Name"
+         <input type="text" name="name" id="name" placeholder="Event Name"
           class="bg-gray-100 border-2 w-full p-4 rounded-lg mb-3 @error('name') border-red-500 @enderror " 
-          value="{{ $blog->name }}">
+          value="{{ $event->name }}">
 
          <label for="slug" class="sr-only">Slug</label>
-         <input type="text" name="slug" id="slug" placeholder="Blog Slug"
+         <input type="text" name="slug" id="slug" placeholder="Event Slug"
           class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 @error('slug') border-red-500 @enderror " 
-          value="{{ $blog->slug }}">
+          value="{{ $event->slug }}">
 
 
+         <label for="date" class="sr-only">Date</label>
+         <input type="text" name="date" id="date" placeholder="Event Date (optional)"
+          class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 @error('date') border-red-500 @enderror " 
+          value="{{ $event->date }}">
+
+
+        <label for="duration" class="sr-only">Date</label>
+         <input type="text" name="duration" id="duration" placeholder="Event Duration (optional)"
+          class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 @error('duration') border-red-500 @enderror " 
+          value="{{ $event->duration }}">
 
         <label for="image" class="sr-only">Image</label>
         <input type="file" name="image" id="image" class="bg-gray-100 border-2 p-2 text-xs rounded-lg mb-4 @error('image') border-red-500 @enderror" >
@@ -33,7 +45,7 @@
 
 
         <label for="body" class="sr-only">Body</label>
-        <textarea name="body" id="body" cols="30" rows="20" class="bg-gray-100  border-2 w-full p-4 rounded-lg content" @error('body') border-red-500  @enderror placeholder="Post Body">{{ $blog->body }}</textarea>
+        <textarea name="body" id="body" cols="30" rows="20" class="bg-gray-100  border-2 w-full p-4 rounded-lg content" @error('body') border-red-500  @enderror placeholder="Post Body">{{ $event->body }}</textarea>
 
       </div>
 

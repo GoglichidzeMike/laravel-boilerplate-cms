@@ -23,7 +23,7 @@
 
 
     <div class="flex">
-      <div class="bg-blue-500 text-white px-4 py-2 mr-5 rounded font-medium hover:bg-blue-700 transition duration-150 ease-in-out"><a href="{{ route('blog.edit', $blog->id) }}">Edit</a></div>
+      <a class="bg-blue-500 text-white px-4 py-2 mr-5 rounded font-medium hover:bg-blue-700 transition duration-150 ease-in-out" href="{{ route('blog.edit', $blog->id) }}">Edit</a>
       <div>
         <form action="{{ route('blog.destroy', $blog->id) }}" method="POST">
           @csrf

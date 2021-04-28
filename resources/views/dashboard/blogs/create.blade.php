@@ -10,7 +10,7 @@
     <form action="{{ route('blogs') }}" method="post" class="mb-4" enctype="multipart/form-data">
       @csrf
       <div class="mb-4">
-
+         <h2 class="text-2xl mb-2">Create a blog</h2>
          <label for="name" class="sr-only">Name</label>
          <input type="text" name="name" id="name" placeholder="Blog Name"
           class="bg-gray-100 border-2 w-full p-4 rounded-lg mb-3 @error('name') border-red-500 @enderror " 
@@ -18,13 +18,13 @@
 
          <label for="slug" class="sr-only">Slug</label>
          <input type="text" name="slug" id="slug" placeholder="Blog Slug"
-          class="bg-gray-100 border-2 w-full p-2 text-sm rounded-lg mb-4 @error('slug') border-red-500 @enderror " 
+          class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 @error('slug') border-red-500 @enderror " 
           value="{{ old('slug') }}">
 
 
 
         <label for="image" class="sr-only">Image</label>
-        <input type="file" name="image" id="image" class="bg-gray-100 border-2 w-full p-2 text-sm rounded-lg mb-4 @error('image') border-red-500 @enderror " 
+        <input type="file" name="image" id="image" class="bg-gray-100 border-2 p-2 text-xs rounded-lg mb-4 @error('image') border-red-500 @enderror " 
           value="{{ old('slug') }}" placeholder="image">
           @error('image')
           <div class="text-red-500 mt-2 text-sm">
