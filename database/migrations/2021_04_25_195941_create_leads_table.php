@@ -18,10 +18,14 @@ class CreateLeadsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('message');
+            $table->mediumText('message')->nullable();
+            $table->string('referrer')->nullable();
             $table->timestamps();
         });
+
+    
     }
+
 
     /**
      * Reverse the migrations.

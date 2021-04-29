@@ -30,6 +30,11 @@
     </div>
 
 
+    <div class="my-10">
+      @include('dashboard.includes.register')
+    </div>
+
+
     <div class="flex">
       <a class="bg-blue-500 text-white px-4 py-2 mr-5 rounded font-medium hover:bg-blue-700 transition duration-150 ease-in-out" href="{{ route('event.edit', $event->id) }}">Edit</a>
       <div>

@@ -13,7 +13,8 @@ class Lead extends Model
          'name',
          'email',
          'phone',
-         'message'
+         'message',
+         'referrer'
      ];
 
 }

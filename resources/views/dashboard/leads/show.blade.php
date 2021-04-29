@@ -25,9 +25,17 @@
       <span class="font-semibold mr-3">Phone: </span> <span>{{ $lead->phone }}</span>
     </div>
 
-    <div class="my-5">
-      <span class="font-semibold mr-3">Message: </span> <span>{{ $lead->message }}</span>
-    </div>
+    @if ($lead->message)
+      <div class="my-5">
+        <span class="font-semibold mr-3">Message: </span> <span>{{ $lead->message }}</span>
+      </div>        
+    @endif
+
+    @if ($lead->referrer)
+      <div class="my-5">
+        <span class="font-semibold mr-3">Event: </span> <span>{{ $lead->event }}</span>
+      </div>        
+    @endif
 
     <div class="flex">
       <div>

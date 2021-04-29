@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lead;
+use App\Models\Event;
 
 class LeadController extends Controller
 {
@@ -28,9 +29,10 @@ class LeadController extends Controller
 
     public function store(Request $request)
     {
+
+
         //validate all the request
         $this->validate($request,[
-            'message'=> 'required',
             'name'=>'required',
             'phone'=>'required',
             'email'=>'required|email',
@@ -42,17 +44,23 @@ class LeadController extends Controller
              'name'=> $request->name,
              'message'=> $request->message,
              'phone'=> $request->phone,
-             'email'=> $request->email
+             'email'=> $request->email,
+             'referrer'=> $request->referrer
             ]
         );
 
-        return redirect()->route('contact')->with('status', 'Your Message was successfully send!');
+        return redirect()->back()->with('status', 'You have successfully registered!');
     }
 
 
     public function show($id)
     {
           $lead = Lead::find($id);
+
+          if ($lead->referrer) {
+           $event = Event::where('slug', '=', $lead->referrer )->firstOrFail();
+           $lead->event = $event->name;
+          };
 
           return view('dashboard.leads.show', ['lead'=>$lead]);
     }
