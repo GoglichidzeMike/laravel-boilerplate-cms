@@ -19,6 +19,9 @@
           <a href="{{ route('blogs') }}" class="p-3">Blogs</a>
         </li>
         <li>
+          <a href="{{ route('events') }}" class="p-3">Events</a>
+        </li>
+        <li>
           <a href="{{ route('contact') }}" class="p-3">Contact</a>
         </li>
       </ul>

@@ -24,19 +24,6 @@ Route::get('/contact', function(){
 
 
 
-
-
-// Route::post('/upload', function(Request $request){
-//     $file=$request->file('file');
-//     $filename = date('YmdHis') . $file->getClientOriginalExtension();
-//     $path= url('/uploads/image').'/'.$filename;
-//     $file->move(public_path('/uploads/image'),$filename);
-//     $fileNameToStore= $path;
-
-//     return json_encode(['location' => $fileNameToStore]); 
-// });
-
-
 //dashboard route
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 
@@ -65,18 +52,16 @@ Route::post('/dashboard/event/update/{id}', [EventController::class,'update'])->
 Route::post('/dashboard/event/{id}', [EventController::class,'destroy'])->name('event.destroy')->middleware('auth');
 Route::post('/dashboard/event/upload', [EventController::class,'image_upload'])->middleware('auth');
 
-Route::get('/event', [EventController::class,'index'])->name('events');    // TODO: need to move this to public-blogs
-Route::get('/event/{slug}', [EventController::class,'public_show'])->name('public_event.show'); // TODO: need to move this to public-blogs
-Route::post('/event', [EventController::class,'store'])->middleware('auth');
-
-
+Route::get('/events', [EventController::class,'index'])->name('events');    // TODO: need to move this to public-blogs
+Route::get('/events/{slug}', [EventController::class,'public_show'])->name('public_event.show'); // TODO: need to move this to public-blogs
+Route::post('/events', [EventController::class,'store'])->middleware('auth');
 
 
 // contact controllers
 Route::get('/dashboard/leads', [LeadController::class, 'index'])->name('lead.dashboard');
 Route::post('/contact', [LeadController::class,'store']);
-Route::post('/contact/leads/{id}', [LeadController::class, 'destroy'])->name('lead.destroy');
-Route::get('/leads/{id}', [LeadController::class, 'show'])->name('lead.show');
+Route::post('/contact/leads/{id}', [LeadController::class, 'destroy'])->name('lead.destroy')->middleware('auth');
+Route::get('/leads/{id}', [LeadController::class, 'show'])->name('lead.show')->middleware('auth');
 
 //Auth routes
 Route::get('/login', [LoginController::class,'index'])->name('login');
