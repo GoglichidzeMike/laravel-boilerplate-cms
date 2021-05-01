@@ -14,7 +14,7 @@
         <a href="{{ route('public_blogs.show' , $blog->slug) }}"><h2>{{ $blog->name }}</h2></a>
 
         <div class="flex flex-col mt-3">
-          <a href="" class="font-bold">{{ $blog->user->name }}</a>
+          <a href="{{ route('public_blogs.show' , $blog->slug) }}" class="font-bold">{{ $blog->user->name }}</a>
           <span class="text-gray-600 text-sm">  {{   $blog->created_at->toFormattedDateString() }}</span>
         </div>
         {{-- <div class="my-3">
