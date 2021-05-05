@@ -9,7 +9,12 @@
 
 
   <div class="w-10/12 bg-white p-6 rounded-lg">
-
+  <span data-href="/leads/exort" id="export" class="inline-block  text-center bg-blue-500 text-white px-4 ml-auto mb-2 cursor-pointer py-1 rounded hover:bg-blue-700 font-medium transition duration-150 ease-in-out" onclick="exportTasks(event.target);">Export</span>
+  <script>
+    function exportTasks(_this) {
+        window.location.href = '/leads/export';
+    }
+  </script>
     <div class="flex rounded-sm w-full bg-gray-100 mb-4 shadow">
       <div class="rounded-sm p-2 rounded-sm border-2 border-r-0 border-gray w-2/12">Name</div>
       <div class="rounded-sm p-2 rounded-sm border-2 border-r-0 border-gray w-2/12">Date</div>

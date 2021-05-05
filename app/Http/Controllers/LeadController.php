@@ -76,4 +76,39 @@ class LeadController extends Controller
     }
 
 
+    public function exportCsv(Request $request)
+    {
+        $fileName = 'leads_export_' .date('YmdHis') . ".csv";
+        $leads = Lead::orderBy('created_at', 'desc')->get();
+
+        $headers = array(
+            "Content-type"        => "text/csv; charset=utf-8",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = array('name', 'phone', 'email', 'message', 'referrer', 'created_at');
+
+        $callback = function() use($leads, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($leads as $lead) {
+                $row['name']  = $lead->name;
+                $row['phone']    = $lead->phone;
+                $row['email']    = $lead->email;
+                $row['message']  = $lead->message;
+                $row['referrer']  = $lead->referrer;
+                $row['created_at']  = $lead->created_at->toFormattedDateString();
+
+                fputcsv($file, array($row['name'], $row['phone'], $row['email'], $row['message'], $row['referrer'], $row['created_at']), ";");
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }
