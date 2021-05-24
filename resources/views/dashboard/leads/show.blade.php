@@ -4,12 +4,8 @@
 @section('content')
     
 <div class="flex flex-col items-center" >
-  @include('dashboard.includes.nav')
-
-  <div class="w-8/12 bg-white p-6 mb-10 rounded-lg">
-
-
-    <h2 class="text-3xl">
+  <div class="w-95 md:w-8/12 bg-white py-6 px-2 md:p-6 mb-10 rounded-lg">
+    <h2 class="text-2xl sm:text-3xl">
       {{$lead->name}}      
     </h2>
 
@@ -38,10 +34,10 @@
     @endif
 
     <div class="flex">
-      <div>
-        <form action="{{ route('lead.destroy', $lead->id) }}" method="POST">
+        <a href="{{ route('lead.dashboard') }}" class="text-dark border border-blue-500 px-4 py-1 rounded hover:bg-blue-700 hover:text-white font-medium transition duration-200 ease-in-out tracking-widest cursor-pointer">All Leads</a>
+      <form action="{{ route('lead.destroy', $lead->id) }}" method="POST" class="ml-4">
           @csrf
-          <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 font-medium transition duration-150 ease-in-out" onclick="return confirm('Are you sure? This will forever delete this lead.')">Delete</button>
+          <button type="submit" class=" text-dark border border-red-500 px-4 py-1 rounded hover:bg-red-700 hover:text-white font-medium transition duration-200 ease-in-out tracking-widest" onclick="return confirm('Are you sure? This will forever delete this lead.')">Delete</button>
         </form>
       </div>
     </div>

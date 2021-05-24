@@ -10,25 +10,9 @@ class EventController extends Controller
 {
 
 
-    //events blogs index
-    public function index()
-   {
-        $events = Event::orderBy('created_at', 'desc')->paginate(10); 
-        return view('events.index', [ 
-            'events' => $events
-        ]);
-   }
-   
-
-
-    public function public_show($slug)
-    {
-
-        $event = Event::where('slug', '=', $slug)->firstOrFail();
-
-        return view('events.show',[
-            'event' => $event
-        ]);
+    public function __construct()
+    {  
+        $this->middleware(['auth']);
     }
 
 

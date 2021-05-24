@@ -3,28 +3,25 @@
 @section('content')
     
 <div class="flex flex-col items-center" >
-  @include('dashboard.includes.nav')
-
-  
-  <div class="w-8/12 bg-white p-6 rounded-lg mb-4">
+  <div class="w-95 md:w-10/12 lg:w-8/12 bg-white px-1 py-4 md:p-6 rounded-lg mb-4">
     <form action="{{ route('blog.update', $blog->id) }}" method="post" class="mb-4" enctype="multipart/form-data">
       @csrf
       <div class="mb-4">
 
          <label for="name" class="sr-only">Name</label>
          <input type="text" name="name" id="name" placeholder="Blog Name"
-          class="bg-gray-100 border-2 w-full p-4 rounded-lg mb-3 @error('name') border-red-500 @enderror " 
+          class="bg-gray-100 border-2 w-full p-4 rounded-lg mb-3 text-sm md:text-base @error('name') border-red-500 @enderror " 
           value="{{ $blog->name }}">
 
          <label for="slug" class="sr-only">Slug</label>
          <input type="text" name="slug" id="slug" placeholder="Blog Slug"
-          class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 @error('slug') border-red-500 @enderror " 
+          class="bg-gray-100 border-2 p-2 text-sm rounded-lg mb-4 w-full md:w-auto @error('slug') border-red-500 @enderror " 
           value="{{ $blog->slug }}">
 
 
 
         <label for="image" class="sr-only">Image</label>
-        <input type="file" name="image" id="image" class="bg-gray-100 border-2 p-2 text-xs rounded-lg mb-4 @error('image') border-red-500 @enderror" >
+        <input type="file" name="image" id="image" class="bg-gray-100 border-2 w-full md:w-auto p-2 text-xs rounded-lg mb-4 @error('image') border-red-500 @enderror" >
           @error('image')
           <div class="text-red-500 mt-2 text-sm">
             {{ $message }}

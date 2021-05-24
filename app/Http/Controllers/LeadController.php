@@ -49,7 +49,7 @@ class LeadController extends Controller
             ]
         );
 
-        return redirect()->back()->with('status', 'You have successfully registered!');
+        return redirect(url()->previous().'#contact')->with('status', 'თქვენი შეტყობინება წარმატებით გაიგზავნა!');
     }
 
 

@@ -9,28 +9,11 @@ use Illuminate\Support\Facades\File;
 
 class BlogsController extends Controller
 {
-    //public blogs index
-    public function index()
-   {
-    $blogs = Blog::orderBy('created_at', 'desc')->paginate(10); 
-    return view('blogs.index', [ 
-        'blogs' => $blogs
-    ]);
-   }
-   
 
-
-    public function public_show($slug)
-    {
-
-        $blog = Blog::where('slug', '=', $slug)->firstOrFail();
-
-        return view('blogs.show',[
-            'blog' => $blog
-        ]);
+    public function __construct()
+    {  
+        $this->middleware(['auth']);
     }
-
-
 
     //dashboard blogs start here
     public function store(Request $request)

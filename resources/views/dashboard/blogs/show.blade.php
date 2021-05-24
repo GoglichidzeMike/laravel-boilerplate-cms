@@ -1,20 +1,25 @@
-
 @extends('layouts.app')
 
 @section('content')
     
 <div class="flex flex-col items-center" >
-  @include('dashboard.includes.nav')
+    @if (session('status'))
+      <div class="mb-6 bg-white rounded-lg w-8/12 p-3">
+        <div class="mx-auto text-center text-green-700 font-medium ">
+          <p class="animate-pulse">
+             {{ session('status') }}   
+          </p>
+        </div>
+      </div>
+    @endif  
+  <div class="w-95 md:w-10/12 lg:w-8/12 bg-white p-6 mb-10 rounded-lg">
 
-  <div class="w-8/12 bg-white p-6 mb-10 rounded-lg">
-
-
-    <h2 class="text-3xl">
+    <h2 class="text-2xl md:text-3xl">
       {{$blog->name}}      
     </h2>
 
     <div class="my-10">
-      <img class="rounded-md max-w-sm shadow" src="{{asset('/uploads/image/'.$blog->image)}}" alt="{{ $blog->name }}">
+      <img class="rounded-md md:max-w-sm shadow" src="{{asset('/uploads/image/'.$blog->image)}}" alt="{{ $blog->name }}">
     </div>
 
     <div class="my-10">

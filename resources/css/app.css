@@ -1,3 +1,93 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nav {
+    max-height: 4rem;
+    transition: max-height 400ms ease-in-out;
+}
+
+.burger {
+    width: 50px;
+    height: 50px;
+    background: white;
+    opacity: 0.9;
+    padding: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid rgba(black, 0.1);
+}
+
+.burger div {
+    height: 3px;
+    background-color: #105650;
+    margin: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-active {
+    max-height: 500px;
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-6px, -6px);
+}
+
+/* back to top button */
+
+#button {
+    display: inline-block;
+    background-color: #55c187;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+#button::after {
+    content: url("/image/chevron_big_up.svg");
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 35px;
+    color: #fff;
+}
+#button:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+#button:active {
+    background-color: #555;
+}
+#button.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (min-width: 500px) {
+    #button {
+        margin: 30px;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .animated:hover::before,
+    .animated:focus::before {
+        left: 0;
+        right: auto;
+        width: 100%;
+    }
+}
